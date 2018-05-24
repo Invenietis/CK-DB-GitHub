@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\Common\Shared.props" />
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.0;net461</TargetFrameworks>
+    <Description>This package contains tests for CK.DB.User.UserGithub.AuthScope (uses CK.DB.Tests.NUnit).</Description>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="CK.DB.Auth.AuthScope.Tests" Version="$(CKDBVersion)" />
+    <ProjectReference Include="..\..\CK.DB.User.UserGithub.AuthScope\CK.DB.User.UserGithub.AuthScope.csproj" />
+    <ProjectReference Include="..\CK.DB.User.UserGithub.Tests\CK.DB.User.UserGithub.Tests.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+    <PackageReference Include="NUnitLite" Version="3.10.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
+  </ItemGroup>
+</Project>
