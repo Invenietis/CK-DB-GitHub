@@ -22,11 +22,6 @@ namespace CK.DB.User.UserGithub
     [SqlObjectItem( "transform:vUserAuthProvider" )]
     public class Package : SqlPackage
     {
-        /// <summary>
-        /// Github api url (https://www.googleapis.com).
-        /// </summary>
-        public static readonly string ApiUrl = "https://www.googleapis.com";
-
         void StObjConstruct( Actor.Package actorPackage, Auth.Package authPackage )
         {
         }

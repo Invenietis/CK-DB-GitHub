@@ -20,7 +20,7 @@ namespace CK.DB.User.UserGithub
     /// Github authentication provider.
     /// </summary>
     [SqlTable( "tUserGithub", Package = typeof( Package ), Schema = "CK" )]
-    [Versions( "1.0.0,1.0.1,1.0.2,2.0.0,2.0.1" )]
+    [Versions( "2.0.1" )]
     [SqlObjectItem( "transform:sUserDestroy" )]
     public abstract partial class UserGithubTable : SqlTable, IGenericAuthenticationProvider<IUserGithubInfo>
     {
