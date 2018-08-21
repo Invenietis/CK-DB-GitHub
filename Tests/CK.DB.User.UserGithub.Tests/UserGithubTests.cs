@@ -19,9 +19,9 @@ namespace CK.DB.User.UserGithub.Tests
         [Test]
         public void create_Github_user_and_check_read_info_object_method()
         {
-            var u = TestHelper.StObjMap.Default.Obtain<UserGithubTable>();
-            var user = TestHelper.StObjMap.Default.Obtain<UserTable>();
-            var infoFactory = TestHelper.StObjMap.Default.Obtain<IPocoFactory<IUserGithubInfo>>();
+            var u = TestHelper.StObjMap.StObjs.Obtain<UserGithubTable>();
+            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGithubInfo>>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 var userName = Guid.NewGuid().ToString();
@@ -46,9 +46,9 @@ namespace CK.DB.User.UserGithub.Tests
         [Test]
         public async Task create_Github_user_and_check_read_info_object_method_async()
         {
-            var u = TestHelper.StObjMap.Default.Obtain<UserGithubTable>();
-            var user = TestHelper.StObjMap.Default.Obtain<UserTable>();
-            var infoFactory = TestHelper.StObjMap.Default.Obtain<IPocoFactory<IUserGithubInfo>>();
+            var u = TestHelper.StObjMap.StObjs.Obtain<UserGithubTable>();
+            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGithubInfo>>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 var userName = Guid.NewGuid().ToString();
@@ -79,8 +79,8 @@ namespace CK.DB.User.UserGithub.Tests
         [Test]
         public void vUserAuthProvider_reflects_the_user_Github_authentication()
         {
-            var u = TestHelper.StObjMap.Default.Obtain<UserGithubTable>();
-            var user = TestHelper.StObjMap.Default.Obtain<UserTable>();
+            var u = TestHelper.StObjMap.StObjs.Obtain<UserGithubTable>();
+            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 string userName = "Github auth - " + Guid.NewGuid().ToString();
@@ -102,9 +102,9 @@ namespace CK.DB.User.UserGithub.Tests
         [Test]
         public void standard_generic_tests_for_Github_provider()
         {
-            var auth = TestHelper.StObjMap.Default.Obtain<Auth.Package>();
+            var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
             // With IUserGithubInfo POCO.
-            var f = TestHelper.StObjMap.Default.Obtain<IPocoFactory<IUserGithubInfo>>();
+            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGithubInfo>>();
             CK.DB.Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProvider(
                 auth,
                 "Github",
@@ -134,8 +134,8 @@ namespace CK.DB.User.UserGithub.Tests
         [Test]
         public async Task standard_generic_tests_for_Github_provider_Async()
         {
-            var auth = TestHelper.StObjMap.Default.Obtain<Auth.Package>();
-            var f = TestHelper.StObjMap.Default.Obtain<IPocoFactory<IUserGithubInfo>>();
+            var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
+            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGithubInfo>>();
             await Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProviderAsync(
                 auth,
                 "Github",
