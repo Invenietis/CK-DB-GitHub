@@ -1,6 +1,6 @@
 -- SetupConfig: {}
 --
--- @GithubAccountId can not be null. This is the key that identifies a Github user.
+-- @GitHubAccountId can not be null. This is the key that identifies a GitHub user.
 --
 -- @Mode (flags): CreateOnly = 1, UpdateOnly = 2, CreateOrUpdate = 3, WithCheckLogin = 4, WithActualLogin = 8.
 --                @Mode is normalized:
@@ -12,19 +12,19 @@
 --  - @Mode must be UpdateOnly+WithCheckLogin (6) or UpdateOnly+WithActualLogin (10).
 --    If the google id is found, we update what we have to and output the found @UserId.
 --
--- When @UserId is not 0, it must match with the one of the @GithubAccountId otherwise it is an error
+-- When @UserId is not 0, it must match with the one of the @GitHubAccountId otherwise it is an error
 -- and an exception is thrown because:
---  - When updating it means that there is a mismatch of UserId/Github account in the calling code.
+--  - When updating it means that there is a mismatch of UserId/GitHub account in the calling code.
 --  - When creating it means that another user with the same google account is already registered and
 --    this should never happen.
 --
 -- When extending this procedure, during update null parameters must be left unchanged.
 --
-create procedure CK.sUserGithubUCL
+create procedure CK.sUserGitHubUCL
 (
 	@ActorId int,
 	@UserId int /*input*/output,
-	@GithubAccountId varchar(36), 
+	@GitHubAccountId varchar(36), 
 	@Mode int, -- not null enum { "CreateOnly" = 1, "UpdateOnly" = 2, "CreateOrUpdate" = 3, "WithCheckLogin" = 4, "WithActualLogin" = 8, "IgnoreOptimisticKey" = 16 }
 	@UCResult int output, -- not null enum { None = 0, Created = 1, Updated = 2 }
     @LoginFailureCode int output, -- Optional. Set by CK.sAuthUserOnLogin if login is rejected.
@@ -52,7 +52,7 @@ begin
 
     if @ActorId is null or @ActorId <= 0 throw 50000, 'Security.AnonymousNotAllowed', 1;
     if @UserId is null or @UserId < 0 throw 50000, 'Argument.InvalidUserId', 1;
-	if @GithubAccountId is null throw 50000, 'Argument.NullGithubAccountId', 1;
+	if @GitHubAccountId is null throw 50000, 'Argument.NullGitHubAccountId', 1;
 	if @UserId = 0 and (@Mode <> 2 or @CheckLogin = 0) throw 50000, 'Argument.ForUserIdZeroModeMustBeUpdateOnlyWithLogin', 1;
 	--[beginsp]
 
@@ -62,8 +62,8 @@ begin
 
 	select	@ActualUserId = UserId,
             @LastLoginTime = LastLoginTime
-		from CK.tUserGithub 
-		where GithubAccountId = @GithubAccountId;
+		from CK.tUserGitHub 
+		where GitHubAccountId = @GitHubAccountId;
 
 	--<PreCreateOrUpdate revert /> 
 
@@ -74,10 +74,10 @@ begin
             set @LastLoginTime = '0001-01-01';
 			--<PreCreate revert /> 
 
-			-- Unique constraint on GithubAccountId will detect any existing UserId/GithubAccountId clashes.
-			insert into CK.tUserGithub( UserId, GithubAccountId, LastLoginTime ) 
+			-- Unique constraint on GitHubAccountId will detect any existing UserId/GitHubAccountId clashes.
+			insert into CK.tUserGitHub( UserId, GitHubAccountId, LastLoginTime ) 
 				select	@UserId, 
-						@GithubAccountId, 
+						@GitHubAccountId, 
 						@LastLoginTime;
 
 			set @UCResult = 1; -- Created
@@ -94,15 +94,15 @@ begin
 			-- When updating, we may be in "login mode" if @UserId is 0.
 			-- But if we are not, the provided @UserId must match the actual one.
 			if @UserId = 0 set @UserId = @ActualUserId;
-			else if @UserId <> @ActualUserId throw 50000, 'Argument.UserIdAndGithubIdMismatch', 1;
+			else if @UserId <> @ActualUserId throw 50000, 'Argument.UserIdAndGitHubIdMismatch', 1;
 
             -- We have nothing to update since in case of login, LastLoginTime must be set
             -- after having called CK.sAuthUserOnLogin.
             -- This fake update is used as a placeholder for any actual updates that may be
             -- injected by other packages.
-			update CK.tUserGithub set 
+			update CK.tUserGitHub set 
 					LastLoginTime = LastLoginTime 
-				where UserId = @ActualUserId and GithubAccountId = @GithubAccountId;
+				where UserId = @ActualUserId and GitHubAccountId = @GitHubAccountId;
 			set @UCResult = 2; -- Updated
 		end
 		else set @UCResult = 0; -- None 
@@ -116,11 +116,11 @@ begin
         if @LastLoginTime is null set @LoginFailureCode = 2; -- UnregisteredUser
         else
         begin
-		    exec CK.sAuthUserOnLogin 'Github', @LastLoginTime, @UserId, @ActualLogin, @Now, @LoginFailureCode output, @LoginFailureReason output;  
+		    exec CK.sAuthUserOnLogin 'GitHub', @LastLoginTime, @UserId, @ActualLogin, @Now, @LoginFailureCode output, @LoginFailureReason output;  
             if @ActualLogin = 1 and @LoginFailureCode is null
             begin
-			    update CK.tUserGithub set LastLoginTime = @Now
-                    where UserId = @UserId and GithubAccountId = @GithubAccountId;
+			    update CK.tUserGitHub set LastLoginTime = @Now
+                    where UserId = @UserId and GitHubAccountId = @GitHubAccountId;
             end
         end
 	end

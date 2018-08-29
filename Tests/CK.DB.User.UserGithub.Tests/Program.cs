@@ -1,6 +1,6 @@
 #if !NET461
 
-namespace CK.DB.User.UserGithub.Tests
+namespace CK.DB.User.UserGitHub.Tests
 {
     public class Program
     {

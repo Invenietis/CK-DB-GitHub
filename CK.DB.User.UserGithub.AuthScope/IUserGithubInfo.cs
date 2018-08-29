@@ -1,18 +1,18 @@
 using CK.Core;
 using System;
 
-namespace CK.DB.User.UserGithub.AuthScope
+namespace CK.DB.User.UserGitHub.AuthScope
 {
     /// <summary>
-    /// Extends <see cref="UserGithub.IUserGithubInfo"/> with ScopeSet identifier.
+    /// Extends <see cref="UserGitHub.IUserGitHubInfo"/> with ScopeSet identifier.
     /// </summary>
-    public interface IUserGithubInfo : UserGithub.IUserGithubInfo
+    public interface IUserGitHubInfo : UserGitHub.IUserGitHubInfo
     {
         /// <summary>
         /// Gets the scope set identifier.
         /// Note that the ScopeSetId is intrinsic: a new ScopeSetId is acquired 
-        /// and set only when a new UserGithub is created (by copy from 
-        /// the default one - the ScopeSet of the UserGithub 0).
+        /// and set only when a new UserGitHub is created (by copy from 
+        /// the default one - the ScopeSet of the UserGitHub 0).
         /// </summary>
         int ScopeSetId { get; }
     }

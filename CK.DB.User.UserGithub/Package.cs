@@ -12,10 +12,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CK.DB.User.UserGithub
+namespace CK.DB.User.UserGitHub
 {
     /// <summary>
-    /// Package that adds Github authentication support for users. 
+    /// Package that adds GitHub authentication support for users. 
     /// </summary>
     [SqlPackage( Schema = "CK", ResourcePath = "Res" )]
     [Versions("1.0.0")]
@@ -27,10 +27,10 @@ namespace CK.DB.User.UserGithub
         }
 
         /// <summary>
-        /// Gets the user Github table.
+        /// Gets the user GitHub table.
         /// </summary>
         [InjectContract]
-        public UserGithubTable UserGithubTable { get; protected set; }
+        public UserGitHubTable UserGitHubTable { get; protected set; }
 
     }
 }

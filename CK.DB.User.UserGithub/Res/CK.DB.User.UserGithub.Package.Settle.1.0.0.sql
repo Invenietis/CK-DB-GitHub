@@ -1,2 +1,2 @@
 ﻿
-exec CK.sAuthProviderRegister 1, 'Github', 'CK.tUserGithub', 0, null;
+exec CK.sAuthProviderRegister 1, 'GitHub', 'CK.tUserGitHub', 0, null;

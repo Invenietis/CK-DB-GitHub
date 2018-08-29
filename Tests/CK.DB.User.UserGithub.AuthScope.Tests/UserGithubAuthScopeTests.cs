@@ -11,10 +11,10 @@ using CK.DB.Auth.AuthScope;
 using FluentAssertions;
 using static CK.Testing.DBSetupTestHelper;
 
-namespace CK.DB.User.UserGithub.AuthScope.Tests
+namespace CK.DB.User.UserGitHub.AuthScope.Tests
 {
     [TestFixture]
-    public class UserGithubAuthScopeTests
+    public class UserGitHubAuthScopeTests
     {
 
         [Test]
@@ -34,7 +34,7 @@ namespace CK.DB.User.UserGithub.AuthScope.Tests
         {
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
             var p = TestHelper.StObjMap.StObjs.Obtain<Package>();
-            var factory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGithubInfo>>();
+            var factory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 AuthScopeSet original = await p.ReadDefaultScopeSetAsync( ctx );
@@ -44,10 +44,10 @@ namespace CK.DB.User.UserGithub.AuthScope.Tests
 
                 {
                     int id = await user.CreateUserAsync( ctx, 1, Guid.NewGuid().ToString() );
-                    IUserGithubInfo userInfo = factory.Create();
-                    userInfo.GithubAccountId = Guid.NewGuid().ToString();
-                    await p.UserGithubTable.CreateOrUpdateGithubUserAsync( ctx, 1, id, userInfo );
-                    var info = await p.UserGithubTable.FindKnownUserInfoAsync( ctx, userInfo.GithubAccountId );
+                    IUserGitHubInfo userInfo = factory.Create();
+                    userInfo.GitHubAccountId = Guid.NewGuid().ToString();
+                    await p.UserGitHubTable.CreateOrUpdateGitHubUserAsync( ctx, 1, id, userInfo );
+                    var info = await p.UserGitHubTable.FindKnownUserInfoAsync( ctx, userInfo.GitHubAccountId );
                     AuthScopeSet userSet = await p.ReadScopeSetAsync( ctx, info.UserId );
                     userSet.ToString().Should().Be( original.ToString() );
                 }
@@ -65,10 +65,10 @@ namespace CK.DB.User.UserGithub.AuthScope.Tests
 
                 {
                     int id = await user.CreateUserAsync( ctx, 1, Guid.NewGuid().ToString() );
-                    IUserGithubInfo userInfo = p.UserGithubTable.CreateUserInfo<IUserGithubInfo>();
-                    userInfo.GithubAccountId = Guid.NewGuid().ToString();
-                    await p.UserGithubTable.CreateOrUpdateGithubUserAsync( ctx, 1, id, userInfo, UCLMode.CreateOnly | UCLMode.UpdateOnly );
-                    userInfo = (IUserGithubInfo)(await p.UserGithubTable.FindKnownUserInfoAsync( ctx, userInfo.GithubAccountId )).Info;
+                    IUserGitHubInfo userInfo = p.UserGitHubTable.CreateUserInfo<IUserGitHubInfo>();
+                    userInfo.GitHubAccountId = Guid.NewGuid().ToString();
+                    await p.UserGitHubTable.CreateOrUpdateGitHubUserAsync( ctx, 1, id, userInfo, UCLMode.CreateOnly | UCLMode.UpdateOnly );
+                    userInfo = (IUserGitHubInfo)(await p.UserGitHubTable.FindKnownUserInfoAsync( ctx, userInfo.GitHubAccountId )).Info;
                     AuthScopeSet userSet = await p.ReadScopeSetAsync( ctx, id );
                     userSet.ToString().Should().Contain( "[W]thing" )
                                                .And.Contain( "[W]other" )

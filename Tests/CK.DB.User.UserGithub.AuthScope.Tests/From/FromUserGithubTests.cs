@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CK.DB.User.UserGithub.AuthScope.Tests.From
+namespace CK.DB.User.UserGitHub.AuthScope.Tests.From
 {
     [TestFixture]
-    public class FromUserGithubTests : CK.DB.User.UserGithub.Tests.UserGithubTests
+    public class FromUserGitHubTests : CK.DB.User.UserGitHub.Tests.UserGitHubTests
     {
     }
 }

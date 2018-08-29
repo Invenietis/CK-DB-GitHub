@@ -1,6 +1,6 @@
 -- SetupConfig: {}
 --
-create procedure CK.sUserGithubDestroy
+create procedure CK.sUserGitHubDestroy
 (
 	@ActorId int,
 	@UserId int
@@ -14,7 +14,7 @@ begin
 
 	--<PreDestroy revert /> 
 	
-	delete CK.tUserGithub where UserId = @UserId;
+	delete CK.tUserGitHub where UserId = @UserId;
 
 	--<PostDestroy /> 
 

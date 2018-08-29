@@ -3,7 +3,7 @@ create transformer on CK.sUserDestroy
 as
 begin
 	inject "
-		exec CK.sUserGithubDestroy @ActorId, @UserId;
+		exec CK.sUserGitHubDestroy @ActorId, @UserId;
 	" 
 	into "PreDestroy";
 end

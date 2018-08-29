@@ -1,6 +1,6 @@
 #if !NET461
 
-namespace CK.DB.User.UserGithub.AuthScope.Tests
+namespace CK.DB.User.UserGitHub.AuthScope.Tests
 {
     public class Program
     {

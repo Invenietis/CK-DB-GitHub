@@ -1,17 +1,17 @@
 --[beginscript]
 
-create table CK.tUserGithub
+create table CK.tUserGitHub
 (
 	UserId int not null,
-	-- The Github account identifier is the key to identify a Github user.
-	GithubAccountId varchar(36) collate Latin1_General_100_BIN2 not null,
+	-- The GitHub account identifier is the key to identify a GitHub user.
+	GitHubAccountId varchar(36) collate Latin1_General_100_BIN2 not null,
 	LastLoginTime datetime2(2) not null,
-	constraint PK_CK_UserGithub primary key (UserId),
-	constraint FK_CK_UserGithub_UserId foreign key (UserId) references CK.tUser(UserId),
-	constraint UK_CK_UserGithub_GithubAccountId unique( GithubAccountId )
+	constraint PK_CK_UserGitHub primary key (UserId),
+	constraint FK_CK_UserGitHub_UserId foreign key (UserId) references CK.tUser(UserId),
+	constraint UK_CK_UserGitHub_GitHubAccountId unique( GitHubAccountId )
 );
 
-insert into CK.tUserGithub( UserId, GithubAccountId, LastLoginTime ) 
+insert into CK.tUserGitHub( UserId, GitHubAccountId, LastLoginTime ) 
 	values( 0, '', sysutcdatetime() );
 
 --[endscript]
