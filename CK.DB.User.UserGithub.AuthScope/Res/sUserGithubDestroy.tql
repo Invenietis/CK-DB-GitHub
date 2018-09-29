@@ -1,11 +1,11 @@
 -- SetupConfig: {}
 --
-create transformer on CK.sUserGithubDestroy
+create transformer on CK.sUserGitHubDestroy
 as
 begin
 	inject "
 	declare @ScopeSetId int;
-	select @ScopeSetId = ScopeSetId from CK.tUserGithub where UserId = @UserId;" 
+	select @ScopeSetId = ScopeSetId from CK.tUserGitHub where UserId = @UserId;" 
 	into "PreDestroy";
 	
 	inject "exec CK.sAuthScopeSetDestroy @ActorId, @ScopeSetId;" 

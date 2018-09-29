@@ -2,13 +2,13 @@
   <Import Project="..\..\Common\Shared.props" />
   <PropertyGroup>
     <TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
-    <Description>This package contains tests for CK.DB.User.UserGithub (uses CK.DB.Tests.NUnit).</Description>
+    <Description>This package contains tests for CK.DB.User.UserGitHub (uses CK.DB.Tests.NUnit).</Description>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
     <OutputType>Exe</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CK.DB.User.UserGithub\CK.DB.User.UserGithub.csproj" />
+    <ProjectReference Include="..\..\CK.DB.User.UserGitHub\CK.DB.User.UserGitHub.csproj" />
     <PackageReference Include="CK.DB.Auth.Tests" Version="$(CKDBVersion)" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">

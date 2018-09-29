@@ -11,17 +11,17 @@ using System.Collections.Generic;
 using FluentAssertions;
 using static CK.Testing.DBSetupTestHelper;
 
-namespace CK.DB.User.UserGithub.Tests
+namespace CK.DB.User.UserGitHub.Tests
 {
     [TestFixture]
-    public class UserGithubTests
+    public class UserGitHubTests
     {
         [Test]
-        public void create_Github_user_and_check_read_info_object_method()
+        public void create_GitHub_user_and_check_read_info_object_method()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserGithubTable>();
+            var u = TestHelper.StObjMap.StObjs.Obtain<UserGitHubTable>();
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
-            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGithubInfo>>();
+            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 var userName = Guid.NewGuid().ToString();
@@ -29,13 +29,13 @@ namespace CK.DB.User.UserGithub.Tests
                 var googleAccountId = Guid.NewGuid().ToString( "N" );
 
                 var info = infoFactory.Create();
-                info.GithubAccountId = googleAccountId;
-                var created = u.CreateOrUpdateGithubUser( ctx, 1, userId, info );
+                info.GitHubAccountId = googleAccountId;
+                var created = u.CreateOrUpdateGitHubUser( ctx, 1, userId, info );
                 created.OperationResult.Should().Be( UCResult.Created );
                 var info2 = u.FindKnownUserInfo( ctx, googleAccountId );
 
                 info2.UserId.Should().Be( userId );
-                info2.Info.GithubAccountId.Should().Be( googleAccountId );
+                info2.Info.GitHubAccountId.Should().Be( googleAccountId );
 
                 u.FindKnownUserInfo( ctx, Guid.NewGuid().ToString() ).Should().BeNull();
                 user.DestroyUser( ctx, 1, userId );
@@ -44,11 +44,11 @@ namespace CK.DB.User.UserGithub.Tests
         }
 
         [Test]
-        public async Task create_Github_user_and_check_read_info_object_method_async()
+        public async Task create_GitHub_user_and_check_read_info_object_method_async()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserGithubTable>();
+            var u = TestHelper.StObjMap.StObjs.Obtain<UserGitHubTable>();
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
-            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGithubInfo>>();
+            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 var userName = Guid.NewGuid().ToString();
@@ -56,13 +56,13 @@ namespace CK.DB.User.UserGithub.Tests
                 var googleAccountId = Guid.NewGuid().ToString( "N" );
 
                 var info = infoFactory.Create();
-                info.GithubAccountId = googleAccountId;
-                var created = await u.CreateOrUpdateGithubUserAsync( ctx, 1, userId, info );
+                info.GitHubAccountId = googleAccountId;
+                var created = await u.CreateOrUpdateGitHubUserAsync( ctx, 1, userId, info );
                 created.OperationResult.Should().Be( UCResult.Created );
                 var info2 = await u.FindKnownUserInfoAsync( ctx, googleAccountId );
 
                 info2.UserId.Should().Be( userId );
-                info2.Info.GithubAccountId.Should().Be( googleAccountId );
+                info2.Info.GitHubAccountId.Should().Be( googleAccountId );
 
                 (await u.FindKnownUserInfoAsync( ctx, Guid.NewGuid().ToString() )).Should().BeNull();
                 await user.DestroyUserAsync( ctx, 1, userId );
@@ -71,77 +71,77 @@ namespace CK.DB.User.UserGithub.Tests
         }
 
         [Test]
-        public void Github_AuthProvider_is_registered()
+        public void GitHub_AuthProvider_is_registered()
         {
-            Auth.Tests.AuthTests.CheckProviderRegistration( "Github" );
+            Auth.Tests.AuthTests.CheckProviderRegistration( "GitHub" );
         }
 
         [Test]
-        public void vUserAuthProvider_reflects_the_user_Github_authentication()
+        public void vUserAuthProvider_reflects_the_user_GitHub_authentication()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserGithubTable>();
+            var u = TestHelper.StObjMap.StObjs.Obtain<UserGitHubTable>();
             var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
             using( var ctx = new SqlStandardCallContext() )
             {
-                string userName = "Github auth - " + Guid.NewGuid().ToString();
+                string userName = "GitHub auth - " + Guid.NewGuid().ToString();
                 var googleAccountId = Guid.NewGuid().ToString( "N" );
                 var idU = user.CreateUser( ctx, 1, userName );
-                u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='Github'" )
+                u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='GitHub'" )
                     .Rows.Should().BeEmpty();
-                var info = u.CreateUserInfo<IUserGithubInfo>();
-                info.GithubAccountId = googleAccountId;
-                u.CreateOrUpdateGithubUser( ctx, 1, idU, info );
-                u.Database.ExecuteScalar( $"select count(*) from CK.vUserAuthProvider where UserId={idU} and Scheme='Github'" )
+                var info = u.CreateUserInfo<IUserGitHubInfo>();
+                info.GitHubAccountId = googleAccountId;
+                u.CreateOrUpdateGitHubUser( ctx, 1, idU, info );
+                u.Database.ExecuteScalar( $"select count(*) from CK.vUserAuthProvider where UserId={idU} and Scheme='GitHub'" )
                     .Should().Be( 1 );
-                u.DestroyGithubUser( ctx, 1, idU );
-                u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='Github'" )
+                u.DestroyGitHubUser( ctx, 1, idU );
+                u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='GitHub'" )
                     .Rows.Should().BeEmpty();
             }
         }
 
         [Test]
-        public void standard_generic_tests_for_Github_provider()
+        public void standard_generic_tests_for_GitHub_provider()
         {
             var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
-            // With IUserGithubInfo POCO.
-            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGithubInfo>>();
+            // With IUserGitHubInfo POCO.
+            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
             CK.DB.Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProvider(
                 auth,
-                "Github",
-                payloadForCreateOrUpdate: ( userId, userName ) => f.Create( i => i.GithubAccountId = "GithubAccountIdFor:" + userName ),
-                payloadForLogin: ( userId, userName ) => f.Create( i => i.GithubAccountId = "GithubAccountIdFor:" + userName ),
-                payloadForLoginFail: ( userId, userName ) => f.Create( i => i.GithubAccountId = "NO!" + userName )
+                "GitHub",
+                payloadForCreateOrUpdate: ( userId, userName ) => f.Create( i => i.GitHubAccountId = "GitHubAccountIdFor:" + userName ),
+                payloadForLogin: ( userId, userName ) => f.Create( i => i.GitHubAccountId = "GitHubAccountIdFor:" + userName ),
+                payloadForLoginFail: ( userId, userName ) => f.Create( i => i.GitHubAccountId = "NO!" + userName )
                 );
             // With a KeyValuePair.
             CK.DB.Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProvider(
                 auth,
-                "Github",
+                "GitHub",
                 payloadForCreateOrUpdate: ( userId, userName ) => new[]
                 {
-                    new KeyValuePair<string,object>( "GithubAccountId", "IdFor:" + userName)
+                    new KeyValuePair<string,object>( "GitHubAccountId", "IdFor:" + userName)
                 },
                 payloadForLogin: ( userId, userName ) => new[]
                 {
-                    new KeyValuePair<string,object>( "GithubAccountId", "IdFor:" + userName)
+                    new KeyValuePair<string,object>( "GitHubAccountId", "IdFor:" + userName)
                 },
                 payloadForLoginFail: ( userId, userName ) => new[]
                 {
-                    new KeyValuePair<string,object>( "GithubAccountId", ("IdFor:" + userName).ToUpperInvariant())
+                    new KeyValuePair<string,object>( "GitHubAccountId", ("IdFor:" + userName).ToUpperInvariant())
                 }
                 );
         }
 
         [Test]
-        public async Task standard_generic_tests_for_Github_provider_Async()
+        public async Task standard_generic_tests_for_GitHub_provider_Async()
         {
             var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
-            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGithubInfo>>();
+            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
             await Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProviderAsync(
                 auth,
-                "Github",
-                payloadForCreateOrUpdate: ( userId, userName ) => f.Create( i => i.GithubAccountId = "GithubAccountIdFor:" + userName ),
-                payloadForLogin: ( userId, userName ) => f.Create( i => i.GithubAccountId = "GithubAccountIdFor:" + userName ),
-                payloadForLoginFail: ( userId, userName ) => f.Create( i => i.GithubAccountId = "NO!" + userName )
+                "GitHub",
+                payloadForCreateOrUpdate: ( userId, userName ) => f.Create( i => i.GitHubAccountId = "GitHubAccountIdFor:" + userName ),
+                payloadForLogin: ( userId, userName ) => f.Create( i => i.GitHubAccountId = "GitHubAccountIdFor:" + userName ),
+                payloadForLoginFail: ( userId, userName ) => f.Create( i => i.GitHubAccountId = "NO!" + userName )
                 );
         }
 

@@ -20,13 +20,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5E754B9E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeCakeBuilder", "CodeCakeBuilder\CodeCakeBuilder.csproj", "{FD4817B6-3CD7-4E74-AA10-7CA95FDFCF2D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGithub", "CK.DB.User.UserGithub\CK.DB.User.UserGithub.csproj", "{73E204F2-01B9-4F42-9766-44AEF8D18536}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGitHub", "CK.DB.User.UserGitHub\CK.DB.User.UserGitHub.csproj", "{73E204F2-01B9-4F42-9766-44AEF8D18536}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGithub.Tests", "Tests\CK.DB.User.UserGithub.Tests\CK.DB.User.UserGithub.Tests.csproj", "{252CE7CB-A1BB-416D-90CA-9EF8DFED3429}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGitHub.Tests", "Tests\CK.DB.User.UserGitHub.Tests\CK.DB.User.UserGitHub.Tests.csproj", "{252CE7CB-A1BB-416D-90CA-9EF8DFED3429}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGithub.AuthScope", "CK.DB.User.UserGithub.AuthScope\CK.DB.User.UserGithub.AuthScope.csproj", "{55449B0C-6005-4EB4-8543-58869A5E3AAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGitHub.AuthScope", "CK.DB.User.UserGitHub.AuthScope\CK.DB.User.UserGitHub.AuthScope.csproj", "{55449B0C-6005-4EB4-8543-58869A5E3AAD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGithub.AuthScope.Tests", "Tests\CK.DB.User.UserGithub.AuthScope.Tests\CK.DB.User.UserGithub.AuthScope.Tests.csproj", "{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGitHub.AuthScope.Tests", "Tests\CK.DB.User.UserGitHub.AuthScope.Tests\CK.DB.User.UserGitHub.AuthScope.Tests.csproj", "{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

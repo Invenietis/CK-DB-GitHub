@@ -2,12 +2,12 @@
   <Import Project="..\Common\Shared.props" />
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
-    <Description>This package adds a ScopeSetId column to CK.tUserGithub table.</Description>
+    <Description>This package adds a ScopeSetId column to CK.tUserGitHub table.</Description>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CK.DB.Auth.AuthScope" Version="$(CKDBVersion)" />
-    <ProjectReference Include="..\CK.DB.User.UserGithub\CK.DB.User.UserGithub.csproj" />
+    <ProjectReference Include="..\CK.DB.User.UserGitHub\CK.DB.User.UserGitHub.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="**\*.sql;**\*.tql;**\*.y4" Exclude="bin\**;obj\**;CodeCakeBuilder\**;packages\**;@(EmbeddedResource)" />

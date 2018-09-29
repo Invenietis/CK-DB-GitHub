@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CK.DB.User.UserGithub.AuthScope.Tests.From
+namespace CK.DB.User.UserGitHub.AuthScope.Tests.From
 {
     [TestFixture]
     public class FromAuthScopeSetTests : CK.DB.Auth.AuthScope.Tests.AuthScopeSetTests

@@ -1,6 +1,6 @@
 version: build{build}
 image: Visual Studio 2017
-clone_folder: C:\CK-World\CK-Database-Projects\CK-DB-Github
+clone_folder: C:\CK-World\CK-Database-Projects\CK-DB-GitHub
 services: mssql2016
 branches:
   only:
@@ -14,6 +14,9 @@ environment:
   MYGET_CI_API_KEY:
     secure: z3ZFnSM3FPCaJYkLhqjZmFTCw1Wf1hmRznQ0/UfxY/5haxctmymvFhh+PTz+/eHw
   SqlServer/MasterConnectionString: Server=(local)\SQL2016;Database=master;User ID=sa;Password=Password12!
+artifacts:
+  - path: Tests/CK.DB.User.UserGitHub.Tests/Logs
+  - path: Tests/CK.DB.User.UserGitHub.AuthScope.Tests/Logs
 build_script:
   - dotnet run --project CodeCakeBuilder -nointeraction
 test: off

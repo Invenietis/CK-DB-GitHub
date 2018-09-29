@@ -1,17 +1,17 @@
 using CK.Core;
 using System;
 
-namespace CK.DB.User.UserGithub
+namespace CK.DB.User.UserGitHub
 {
     /// <summary>
-    /// Holds information stored for a Github user.
+    /// Holds information stored for a GitHub user.
     /// </summary>
-    public interface IUserGithubInfo : IPoco
+    public interface IUserGitHubInfo : IPoco
     {
         /// <summary>
-        /// Gets or sets the Github account identifier.
+        /// Gets or sets the GitHub account identifier.
         /// </summary>
-        string GithubAccountId { get; set; }
+        string GitHubAccountId { get; set; }
     }
 
 }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CK.DB.User.UserGithub.Tests.From
+namespace CK.DB.User.UserGitHub.Tests.From
 {
     [TestFixture]
     public class FromAuthTests : CK.DB.Auth.Tests.AuthTests

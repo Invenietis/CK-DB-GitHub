@@ -3,7 +3,7 @@
     "NUnit GUI": {
       "commandName": "Executable",
       "executablePath": "%USERPROFILE%\\.nuget\\packages\\nunit.runners.net4\\2.6.4\\tools\\nunit.exe",
-      "commandLineArgs": "CK.DB.User.UserGithub.AuthScope.Tests.dll"
+      "commandLineArgs": "CK.DB.User.UserGitHub.AuthScope.Tests.dll"
     },
     "NetCore": {
       "commandName": "Project",

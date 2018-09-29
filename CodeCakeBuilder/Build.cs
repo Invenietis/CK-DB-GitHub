@@ -45,7 +45,7 @@ namespace CodeCake
         {
             Cake.Log.Verbosity = Verbosity.Diagnostic;
 
-            const string solutionName = "CK-DB-Github";
+            const string solutionName = "CK-DB-GitHub";
             const string solutionFileName = solutionName + ".sln";
 
             var releasesDir = Cake.Directory( "CodeCakeBuilder/Releases" );
