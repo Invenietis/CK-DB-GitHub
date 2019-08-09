@@ -5,15 +5,12 @@
     <Description>This package defines tUserGitHub table.</Description>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
   </PropertyGroup>
-  
   <ItemGroup>
     <PackageReference Include="CK.DB.Auth" Version="$(CKDBVersion)" />
   </ItemGroup>
-  
   <ItemGroup>
     <EmbeddedResource Include="**\*.sql;**\*.tql;**\*.y4" Exclude="bin\**;obj\**;@(EmbeddedResource)" />
   </ItemGroup>
-  
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
