@@ -1,18 +1,12 @@
-using CK.Setup;
 using CK.SqlServer;
-using CK.SqlServer.Setup;
-using System;
-using System.Collections.Generic;
+using CK.Core;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CK.Core;
 using System.Threading;
 using CK.DB.Auth;
 using CK.Text;
-using System.Reflection;
-using System.Data;
 
 namespace CK.DB.User.UserGitHub
 {

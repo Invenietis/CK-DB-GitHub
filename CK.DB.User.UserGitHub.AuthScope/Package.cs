@@ -1,7 +1,7 @@
 using CK.DB.Auth.AuthScope;
 using CK.Setup;
 using CK.SqlServer;
-using CK.SqlServer.Setup;
+using CK.Core;
 using System;
 using System.Threading.Tasks;
 
