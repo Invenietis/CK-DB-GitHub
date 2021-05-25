@@ -9,13 +9,13 @@ namespace CK.DB.User.UserGitHub
         /// <summary>
         /// Creates or updates a user entry for this provider. 
         /// This is the "binding account" feature since it binds an external identity to 
-        /// an already existing user that may already be registered into other authencation providers.
+        /// an already existing user that may already be registered into other authentication providers.
         /// </summary>
         /// <param name="ctx">The call context to use.</param>
         /// <param name="actorId">The acting actor identifier.</param>
         /// <param name="userId">The user identifier that must be registered.</param>
         /// <param name="info">Provider specific data: the <see cref="IUserGitHubInfo"/> poco.</param>
-        /// <param name="mode">Optionnaly configures Create, Update only or WithLogin behavior.</param>
+        /// <param name="mode">Optionally configures Create, Update only or WithLogin behavior.</param>
         /// <returns>The result.</returns>
         public UCLResult CreateOrUpdateGitHubUser( ISqlCallContext ctx, int actorId, int userId, IUserGitHubInfo info, UCLMode mode = UCLMode.CreateOrUpdate )
         {
@@ -55,7 +55,7 @@ namespace CK.DB.User.UserGitHub
         /// Returns null if no such user exists.
         /// </summary>
         /// <param name="ctx">The call context to use.</param>
-        /// <param name="googleAccountId">The google account identifier.</param>
+        /// <param name="googleAccountId">The Google account identifier.</param>
         /// <returns>A <see cref="IdentifiedUserInfo{T}"/> or null if not found.</returns>
         public IdentifiedUserInfo<IUserGitHubInfo> FindKnownUserInfo( ISqlCallContext ctx, string googleAccountId )
         {
