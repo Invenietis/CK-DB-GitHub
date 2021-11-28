@@ -9,11 +9,11 @@ namespace CK.DB.User.UserGitHub.AuthScope
     public interface IUserGitHubInfo : UserGitHub.IUserGitHubInfo
     {
         /// <summary>
-        /// Gets the scope set identifier.
+        /// Gets or sets the scope set identifier.
         /// Note that the ScopeSetId is intrinsic: a new ScopeSetId is acquired 
         /// and set only when a new UserGitHub is created (by copy from 
         /// the default one - the ScopeSet of the UserGitHub 0).
         /// </summary>
-        int ScopeSetId { get; }
+        int ScopeSetId { get; set; }
     }
 }
