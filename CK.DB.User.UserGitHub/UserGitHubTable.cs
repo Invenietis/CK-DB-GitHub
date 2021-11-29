@@ -1,12 +1,11 @@
 using CK.SqlServer;
 using CK.Core;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using CK.DB.Auth;
-using CK.Text;
 
 namespace CK.DB.User.UserGitHub
 {
@@ -98,29 +97,29 @@ namespace CK.DB.User.UserGitHub
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>The result.</returns>
         [SqlProcedure( "sUserGitHubUCL" )]
-        protected abstract Task<UCLResult> GitHubUserUCLAsync(
-            ISqlCallContext ctx,
-            int actorId,
-            int userId,
-            [ParameterSource]IUserGitHubInfo info,
-            UCLMode mode,
-            CancellationToken cancellationToken );
+        protected abstract Task<UCLResult> GitHubUserUCLAsync( ISqlCallContext ctx,
+                                                               int actorId,
+                                                               int userId,
+                                                               [ParameterSource] IUserGitHubInfo info,
+                                                               UCLMode mode,
+                                                               CancellationToken cancellationToken );
 
         /// <summary>
         /// Finds a user by its GitHub account identifier.
         /// Returns null if no such user exists.
         /// </summary>
         /// <param name="ctx">The call context to use.</param>
-        /// <param name="googleAccountId">The google account identifier.</param>
+        /// <param name="googleAccountId">The GitHub account identifier.</param>
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>A <see cref="IdentifiedUserInfo{T}"/> object or null if not found.</returns>
-        public Task<IdentifiedUserInfo<IUserGitHubInfo>> FindKnownUserInfoAsync( ISqlCallContext ctx, string googleAccountId, CancellationToken cancellationToken = default( CancellationToken ) )
+        public async Task<IdentifiedUserInfo<IUserGitHubInfo>?> FindKnownUserInfoAsync( ISqlCallContext ctx, string googleAccountId, CancellationToken cancellationToken = default )
         {
             using( var c = CreateReaderCommand( googleAccountId ) )
             {
-                return ctx[Database].ExecuteSingleRowAsync( c, r => r == null
+                return await ctx[Database].ExecuteSingleRowAsync( c, r => r == null
                                                                     ? null
-                                                                    : DoCreateUserUnfo( googleAccountId, r ) );
+                                                                    : DoCreateUserUnfo( googleAccountId, r ),  cancellationToken )
+                                          .ConfigureAwait( false );
             }
         }
 
