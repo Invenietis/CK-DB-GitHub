@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="..\..\Common\Shared.props" />
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Description>This package contains tests for CK.DB.User.UserGitHub.RefreshToken (uses CK.DB.Tests.NUnit).</Description>
+    <IsPackable>True</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\CK.DB.User.UserGitHub.RefreshToken\CK.DB.User.UserGitHub.RefreshToken.csproj" />
+    <ProjectReference Include="..\CK.DB.User.UserGitHub.Tests\CK.DB.User.UserGitHub.Tests.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.0.0" />
+    <PackageReference Include="NUnit" Version="3.13.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
+  </ItemGroup>
+</Project>
