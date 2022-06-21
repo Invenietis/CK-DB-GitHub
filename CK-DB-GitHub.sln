@@ -1,16 +1,16 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2020
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31919.166
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DD8E9B65-DF41-40CF-9995-5965585CF72E}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		appveyor.yml = appveyor.yml
-		nuget.config = nuget.config
+		NuGet.config = NuGet.config
 		RepositoryInfo.xml = RepositoryInfo.xml
-		Common\Shared.props = Common\Shared.props
 		Common\SharedKey.snk = Common\SharedKey.snk
+		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5E754B9E-84B8-426A-95B0-858D3EDCC19B}"
@@ -27,6 +27,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGitHub.AuthScope", "CK.DB.User.UserGitHub.AuthScope\CK.DB.User.UserGitHub.AuthScope.csproj", "{55449B0C-6005-4EB4-8543-58869A5E3AAD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGitHub.AuthScope.Tests", "Tests\CK.DB.User.UserGitHub.AuthScope.Tests\CK.DB.User.UserGitHub.AuthScope.Tests.csproj", "{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGitHub.RefreshToken", "CK.DB.User.UserGitHub.RefreshToken\CK.DB.User.UserGitHub.RefreshToken.csproj", "{947B2F48-3890-4D46-89A9-A68CF6BA64FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CK.DB.User.UserGitHub.RefreshToken.Tests", "Tests\CK.DB.User.UserGitHub.RefreshToken.Tests\CK.DB.User.UserGitHub.RefreshToken.Tests.csproj", "{BEAD67EE-B2BC-4207-911C-EE2FA0709DC3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +58,14 @@ Global
 		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{947B2F48-3890-4D46-89A9-A68CF6BA64FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{947B2F48-3890-4D46-89A9-A68CF6BA64FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{947B2F48-3890-4D46-89A9-A68CF6BA64FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{947B2F48-3890-4D46-89A9-A68CF6BA64FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEAD67EE-B2BC-4207-911C-EE2FA0709DC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEAD67EE-B2BC-4207-911C-EE2FA0709DC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEAD67EE-B2BC-4207-911C-EE2FA0709DC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEAD67EE-B2BC-4207-911C-EE2FA0709DC3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +73,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{252CE7CB-A1BB-416D-90CA-9EF8DFED3429} = {5E754B9E-84B8-426A-95B0-858D3EDCC19B}
 		{3D45FE9D-6A4D-4DBB-8046-D43E34CE5BF7} = {5E754B9E-84B8-426A-95B0-858D3EDCC19B}
+		{BEAD67EE-B2BC-4207-911C-EE2FA0709DC3} = {5E754B9E-84B8-426A-95B0-858D3EDCC19B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5044F9DA-815D-48CE-A4EE-9FA49432D361}
