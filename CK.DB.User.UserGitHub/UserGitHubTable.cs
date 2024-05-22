@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using CK.DB.Auth;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CK.DB.User.UserGitHub
 {
@@ -17,12 +18,17 @@ namespace CK.DB.User.UserGitHub
     [SqlObjectItem( "transform:sUserDestroy" )]
     public abstract partial class UserGitHubTable : SqlTable, IGenericAuthenticationProvider<IUserGitHubInfo>
     {
+        [AllowNull]
         IPocoFactory<IUserGitHubInfo> _infoFactory;
 
         /// <summary>
         /// Gets "GitHub" that is the name of the GitHub provider.
         /// </summary>
         public string ProviderName => "GitHub";
+
+        public bool CanCreatePayload => true;
+
+        object IGenericAuthenticationProvider.CreatePayload() => _infoFactory.Create();
 
         void StObjConstruct( IPocoFactory<IUserGitHubInfo> infoFactory )
         {
@@ -49,7 +55,7 @@ namespace CK.DB.User.UserGitHub
         /// <param name="mode">Optionnaly configures Create, Update only or WithLogin behavior.</param>
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>The result.</returns>
-        public async Task<UCLResult> CreateOrUpdateGitHubUserAsync( ISqlCallContext ctx, int actorId, int userId, IUserGitHubInfo info, UCLMode mode = UCLMode.CreateOrUpdate, CancellationToken cancellationToken = default( CancellationToken ) )
+        public async Task<UCLResult> CreateOrUpdateGitHubUserAsync( ISqlCallContext ctx, int actorId, int userId, IUserGitHubInfo info, UCLMode mode = UCLMode.CreateOrUpdate, CancellationToken cancellationToken = default )
         {
             var r = await GitHubUserUCLAsync( ctx, actorId, userId, info, mode, cancellationToken ).ConfigureAwait( false );
             return r;
@@ -65,7 +71,7 @@ namespace CK.DB.User.UserGitHub
         /// <param name="actualLogin">Set it to false to avoid login side-effect (such as updating the LastLoginTime) on success.</param>
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>The <see cref="LoginResult"/>.</returns>
-        public async Task<LoginResult> LoginUserAsync( ISqlCallContext ctx, IUserGitHubInfo info, bool actualLogin = true, CancellationToken cancellationToken = default( CancellationToken ) )
+        public async Task<LoginResult> LoginUserAsync( ISqlCallContext ctx, IUserGitHubInfo info, bool actualLogin = true, CancellationToken cancellationToken = default )
         {
             var mode = actualLogin
                         ? UCLMode.UpdateOnly | UCLMode.WithActualLogin
@@ -83,7 +89,7 @@ namespace CK.DB.User.UserGitHub
         /// <param name="cancellationToken">Optional cancellation token.</param>
         /// <returns>The awaitable.</returns>
         [SqlProcedure( "sUserGitHubDestroy" )]
-        public abstract Task DestroyGitHubUserAsync( ISqlCallContext ctx, int actorId, int userId, CancellationToken cancellationToken = default( CancellationToken ) );
+        public abstract Task DestroyGitHubUserAsync( ISqlCallContext ctx, int actorId, int userId, CancellationToken cancellationToken = default );
 
         /// <summary>
         /// Raw call to manage GitHubUser. Since this should not be used directly, it is protected.
@@ -200,12 +206,12 @@ namespace CK.DB.User.UserGitHub
             return LoginUserAsync( ctx, info, actualLogin, cancellationToken );
         }
 
-        void IGenericAuthenticationProvider.DestroyUser( ISqlCallContext ctx, int actorId, int userId, string schemeSuffix )
+        void IGenericAuthenticationProvider.DestroyUser( ISqlCallContext ctx, int actorId, int userId, string? schemeSuffix )
         {
             DestroyGitHubUser( ctx, actorId, userId );
         }
 
-        Task IGenericAuthenticationProvider.DestroyUserAsync( ISqlCallContext ctx, int actorId, int userId, string schemeSuffix, CancellationToken cancellationToken )
+        Task IGenericAuthenticationProvider.DestroyUserAsync( ISqlCallContext ctx, int actorId, int userId, string? schemeSuffix, CancellationToken cancellationToken )
         {
             return DestroyGitHubUserAsync( ctx, actorId, userId, cancellationToken );
         }
