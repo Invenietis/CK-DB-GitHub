@@ -13,12 +13,5 @@ namespace CK.DB.User.UserGitHub
         void StObjConstruct( Actor.Package actorPackage, Auth.Package authPackage )
         {
         }
-
-        /// <summary>
-        /// Gets the user GitHub table.
-        /// </summary>
-        [InjectObject]
-        public UserGitHubTable UserGitHubTable { get; protected set; }
-
     }
 }

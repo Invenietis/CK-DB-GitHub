@@ -17,6 +17,6 @@ namespace CK.DB.User.UserGitHub.RefreshToken
         /// <summary>
         /// Gets or sets the refresh token.
         /// </summary>
-        string RefreshToken { get; set; }
+        string? RefreshToken { get; set; }
     }
 }

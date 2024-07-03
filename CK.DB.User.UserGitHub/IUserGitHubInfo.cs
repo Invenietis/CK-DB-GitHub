@@ -10,7 +10,7 @@ namespace CK.DB.User.UserGitHub
         /// <summary>
         /// Gets or sets the GitHub account identifier.
         /// </summary>
-        string GitHubAccountId { get; set; }
+        string? GitHubAccountId { get; set; }
     }
 
 }
