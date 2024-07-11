@@ -1,6 +1,7 @@
 using CK.Core;
 using CK.DB.Actor;
 using CK.SqlServer;
+using CK.Testing;
 using FluentAssertions;
 using NUnit.Framework;
 using System;
@@ -17,7 +18,7 @@ namespace CK.DB.User.UserGitHub.RefreshToken.Tests
         {
             var GitHub = SharedEngine.Map.StObjs.Obtain<UserGitHubTable>();
             var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
-            using( var ctx = new SqlStandardCallContext() )
+            using( var ctx = new SqlStandardCallContext( TestHelper.Monitor ) )
             {
                 string userName = "GitHub RefreshToken - " + Guid.NewGuid().ToString();
                 var GitHubAccountId = Guid.NewGuid().ToString( "N" );
