@@ -9,7 +9,7 @@ using System.Linq;
 using CK.DB.Auth;
 using System.Collections.Generic;
 using FluentAssertions;
-using static CK.Testing.DBSetupTestHelper;
+using static CK.Testing.MonitorTestHelper;
 
 namespace CK.DB.User.UserGitHub.Tests
 {
@@ -19,9 +19,9 @@ namespace CK.DB.User.UserGitHub.Tests
         [Test]
         public void create_GitHub_user_and_check_read_info_object_method()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserGitHubTable>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
-            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
+            var u = SharedEngine.Map.StObjs.Obtain<UserGitHubTable>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
+            var infoFactory = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 var userName = Guid.NewGuid().ToString();
@@ -46,9 +46,9 @@ namespace CK.DB.User.UserGitHub.Tests
         [Test]
         public async Task create_GitHub_user_and_check_read_info_object_method_Async()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserGitHubTable>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
-            var infoFactory = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
+            var u = SharedEngine.Map.StObjs.Obtain<UserGitHubTable>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
+            var infoFactory = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 var userName = Guid.NewGuid().ToString();
@@ -79,8 +79,8 @@ namespace CK.DB.User.UserGitHub.Tests
         [Test]
         public void vUserAuthProvider_reflects_the_user_GitHub_authentication()
         {
-            var u = TestHelper.StObjMap.StObjs.Obtain<UserGitHubTable>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            var u = SharedEngine.Map.StObjs.Obtain<UserGitHubTable>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 string userName = "GitHub auth - " + Guid.NewGuid().ToString();
@@ -102,9 +102,9 @@ namespace CK.DB.User.UserGitHub.Tests
         [Test]
         public void standard_generic_tests_for_GitHub_provider()
         {
-            var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
+            var auth = SharedEngine.Map.StObjs.Obtain<Auth.Package>();
             // With IUserGitHubInfo POCO.
-            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
+            var f = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
             CK.DB.Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProvider(
                 auth,
                 "GitHub",
@@ -134,8 +134,8 @@ namespace CK.DB.User.UserGitHub.Tests
         [Test]
         public async Task standard_generic_tests_for_GitHub_provider_Async()
         {
-            var auth = TestHelper.StObjMap.StObjs.Obtain<Auth.Package>();
-            var f = TestHelper.StObjMap.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
+            var auth = SharedEngine.Map.StObjs.Obtain<Auth.Package>();
+            var f = SharedEngine.Map.StObjs.Obtain<IPocoFactory<IUserGitHubInfo>>();
             await Auth.Tests.AuthTests.StandardTestForGenericAuthenticationProviderAsync(
                 auth,
                 "GitHub",

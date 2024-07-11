@@ -5,7 +5,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using System;
 using System.Threading;
-using static CK.Testing.DBSetupTestHelper;
+using static CK.Testing.MonitorTestHelper;
 
 namespace CK.DB.User.UserGitHub.RefreshToken.Tests
 {
@@ -15,8 +15,8 @@ namespace CK.DB.User.UserGitHub.RefreshToken.Tests
         [Test]
         public void RefreshToken_and_LastRefreshTokenTime_are_managed()
         {
-            var GitHub = TestHelper.StObjMap.StObjs.Obtain<UserGitHubTable>();
-            var user = TestHelper.StObjMap.StObjs.Obtain<UserTable>();
+            var GitHub = SharedEngine.Map.StObjs.Obtain<UserGitHubTable>();
+            var user = SharedEngine.Map.StObjs.Obtain<UserTable>();
             using( var ctx = new SqlStandardCallContext() )
             {
                 string userName = "GitHub RefreshToken - " + Guid.NewGuid().ToString();
