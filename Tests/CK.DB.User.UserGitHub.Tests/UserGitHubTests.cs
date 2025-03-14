@@ -3,7 +3,7 @@ using CK.DB.Actor;
 using CK.DB.Auth;
 using CK.SqlServer;
 using CK.Testing;
-using FluentAssertions;
+using Shouldly;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -30,15 +30,15 @@ public class UserGitHubTests
             var info = infoFactory.Create();
             info.GitHubAccountId = googleAccountId;
             var created = u.CreateOrUpdateGitHubUser( ctx, 1, userId, info );
-            created.OperationResult.Should().Be( UCResult.Created );
+            created.OperationResult.ShouldBe( UCResult.Created );
             var info2 = u.FindKnownUserInfo( ctx, googleAccountId );
 
-            info2.UserId.Should().Be( userId );
-            info2.Info.GitHubAccountId.Should().Be( googleAccountId );
+            info2.UserId.ShouldBe( userId );
+            info2.Info.GitHubAccountId.ShouldBe( googleAccountId );
 
-            u.FindKnownUserInfo( ctx, Guid.NewGuid().ToString() ).Should().BeNull();
+            u.FindKnownUserInfo( ctx, Guid.NewGuid().ToString() ).ShouldBeNull();
             user.DestroyUser( ctx, 1, userId );
-            u.FindKnownUserInfo( ctx, googleAccountId ).Should().BeNull();
+            u.FindKnownUserInfo( ctx, googleAccountId ).ShouldBeNull();
         }
     }
 
@@ -57,15 +57,15 @@ public class UserGitHubTests
             var info = infoFactory.Create();
             info.GitHubAccountId = googleAccountId;
             var created = await u.CreateOrUpdateGitHubUserAsync( ctx, 1, userId, info );
-            created.OperationResult.Should().Be( UCResult.Created );
+            created.OperationResult.ShouldBe( UCResult.Created );
             var info2 = await u.FindKnownUserInfoAsync( ctx, googleAccountId );
 
-            info2.UserId.Should().Be( userId );
-            info2.Info.GitHubAccountId.Should().Be( googleAccountId );
+            info2.UserId.ShouldBe( userId );
+            info2.Info.GitHubAccountId.ShouldBe( googleAccountId );
 
-            (await u.FindKnownUserInfoAsync( ctx, Guid.NewGuid().ToString() )).Should().BeNull();
+            (await u.FindKnownUserInfoAsync( ctx, Guid.NewGuid().ToString() )).ShouldBeNull();
             await user.DestroyUserAsync( ctx, 1, userId );
-            (await u.FindKnownUserInfoAsync( ctx, googleAccountId )).Should().BeNull();
+            (await u.FindKnownUserInfoAsync( ctx, googleAccountId )).ShouldBeNull();
         }
     }
 
@@ -86,15 +86,15 @@ public class UserGitHubTests
             var googleAccountId = Guid.NewGuid().ToString( "N" );
             var idU = user.CreateUser( ctx, 1, userName );
             u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='GitHub'" )
-                .Rows.Should().BeEmpty();
+                .Rows.ShouldBeEmpty();
             var info = u.CreateUserInfo<IUserGitHubInfo>();
             info.GitHubAccountId = googleAccountId;
             u.CreateOrUpdateGitHubUser( ctx, 1, idU, info );
             u.Database.ExecuteScalar( $"select count(*) from CK.vUserAuthProvider where UserId={idU} and Scheme='GitHub'" )
-                .Should().Be( 1 );
+                .ShouldBe( 1 );
             u.DestroyGitHubUser( ctx, 1, idU );
             u.Database.ExecuteReader( $"select * from CK.vUserAuthProvider where UserId={idU} and Scheme='GitHub'" )
-                .Rows.Should().BeEmpty();
+                .Rows.ShouldBeEmpty();
         }
     }
 
